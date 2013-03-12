@@ -47,18 +47,17 @@ void MediaTest01::MainPage::Play_Click(Platform::Object^ sender, Windows::UI::Xa
 	using namespace Windows::Storage;
 	using namespace Windows::Storage::Streams;
 
-	auto getFileTask = create_task(_rootFolder->GetFileAsync("house_01.mp3"));
-	getFileTask.then([=](StorageFile^ soundFile) {       
-        //success
-		auto streamTask = create_task(soundFile->OpenReadAsync());
-		streamTask.then([=](IRandomAccessStream^ randomAccessStream){
-			if(randomAccessStream){
-				MediaElement1->SetSource(randomAccessStream, soundFile->ContentType);
-			}
-		});
-
-    });
-
+	auto getFileTask = create_task(_rootFolder->GetFileAsync("sample.wma"));
+	Platform::String^ mimeType = nullptr;
+	getFileTask.then([&mimeType](StorageFile^ soundFile) {       
+		//success
+		mimeType = soundFile->ContentType;
+		return create_task(soundFile->OpenReadAsync());
+	}).then([=](IRandomAccessStream^ randomAccessStream){
+		if(randomAccessStream){
+			MediaElement1->SetSource(randomAccessStream, mimeType);
+		}	
+	});
 
 }
 
