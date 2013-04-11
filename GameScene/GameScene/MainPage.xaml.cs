@@ -61,14 +61,16 @@ namespace GameScene
 
             _scene.AddGameObject(obj);
 
+            //
+            _scene.Update();
         }
 
+        //test
         private void Canvas_PointerPressed_1(object sender, PointerRoutedEventArgs e)
         {
             var pt = e.GetCurrentPoint(null);
             var obj = new GameObject();
             obj.Pos = pt.Position;
-           
             _scene.AddGameObject(obj);
 
         }

@@ -21,6 +21,7 @@ namespace GameScene
         public void AddEllipse(GameObject obj)
         {
             var ellipse = new Ellipse();
+
             ellipse.Width = 40;
             ellipse.Height = 40;
 
@@ -38,6 +39,7 @@ namespace GameScene
             //画面に追加
             obj.Model = ellipse;
         }
+
     }
 
 }
